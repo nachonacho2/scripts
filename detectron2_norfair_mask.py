@@ -1,23 +1,8 @@
-import detectron2
-from detectron2.utils.logger import setup_logger
-setup_logger()
-# import some common libraries
-import numpy as np
-import tqdm
 import cv2
-import os
-
-# import some common detectron2 utilities
-from detectron2 import model_zoo
-from detectron2.engine import DefaultPredictor
+import numpy as np
 from detectron2.config import get_cfg
-from detectron2.utils.video_visualizer import VideoVisualizer
-from detectron2.utils.visualizer import ColorMode, Visualizer
-from detectron2.data import MetadataCatalog
-import time
-import pickle
+from detectron2.engine import DefaultPredictor
 
-# import norfair
 from norfair import Detection, Tracker, Video, draw_tracked_objects, draw_masks
 
 # Set up Detectron2 object detector
@@ -30,6 +15,7 @@ detector = DefaultPredictor(cfg)
 # Distance function
 def centroid_distance(detection, tracked_object):
     return np.linalg.norm(detection.points - tracked_object.estimate)
+
 
 # Norfair
 video = Video(input_path="./video.mp4")
